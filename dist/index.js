@@ -1,16 +1,2 @@
-'use strict';
-
-var _dotenv = require('dotenv');
-
-var _dotenv2 = _interopRequireDefault(_dotenv);
-
-var _server = require('./server');
-
-var _server2 = _interopRequireDefault(_server);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_dotenv2.default.config({ path: '../.env' });
-
-_server2.default.listen(process.env.PORT);
+'use strict';var _dotenv=require('dotenv'),_dotenv2=_interopRequireDefault(_dotenv),_path=require('path'),_server=require('./server'),_server2=_interopRequireDefault(_server);function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}_dotenv2.default.config({path:(0,_path.resolve)(__dirname,'../.env')}),_server2.default.listen(process.env.PORT,function(){console.log('Listening on '+process.env.PORT)});
 //# sourceMappingURL=index.js.map

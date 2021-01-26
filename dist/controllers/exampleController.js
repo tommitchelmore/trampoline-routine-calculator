@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.default={helloWorld:function c(a,b){b.send({message:"Hello World!"}).status(200)}};
+//# sourceMappingURL=exampleController.js.map
