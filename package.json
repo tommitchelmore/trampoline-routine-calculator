@@ -7,9 +7,17 @@
   "author": "Thomas Mitchelmore",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "argon2": "^0.28.3",
+    "body-parser": "^1.19.1",
+    "cookie-parser": "^1.4.6",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "helmet": "^4.4.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.0",
+    "passport-google-oauth2": "^0.2.0",
+    "uid-safe": "^2.1.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
