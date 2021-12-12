@@ -1,6 +1,4 @@
 import argon2 from 'argon2'
-import passport from 'passport'
-import GoogleStrategy from 'passport-google-oauth2'
 import uid from 'uid-safe'
 import { pool } from '../../database'
 import generateTimestamp from '../../database/util/generateTimestamp'
