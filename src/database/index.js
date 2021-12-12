@@ -37,9 +37,14 @@ const init = async () => {
     console.log('[INIT] Schema created')
 
     // Create tables if they don't already exist
-    console.log('[INIT] Initialising tables...')
-    const tables = await fs.readFile('./database/scripts/createTables.sql', 'utf8')
-    await conn.query(tables)
+    try {
+      console.log('[INIT] Initialising tables...')
+      const tables = await fs.readFile('./scripts/sql/createTables.sql', 'utf8')
+      await conn.query(tables)
+    } catch (err) {
+      console.error('[INIT] Error initialising tables: ' + err.message)
+      process.kill(process.pid, 'SIGINT')
+    }
 
     // Validate tables exist
     const [rows] = await conn.query('SHOW TABLES')
