@@ -1,5 +1,5 @@
 import assert from "assert"
-import { pool } from "../../database"
+import { pool } from "../database"
 
 export default {
   read: async (req, res) => {

@@ -1,7 +1,7 @@
 import uid from "uid-safe"
 import assert from "assert"
-import { pool } from "../../database"
-import generateTimestamp from "../../database/util/generateTimestamp"
+import { pool } from "../database"
+import generateTimestamp from "../database/util/generateTimestamp"
 
 export default {
   create: async (req, res) => {

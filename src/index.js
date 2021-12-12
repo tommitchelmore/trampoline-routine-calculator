@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import {resolve} from 'path'
-import { init } from '../database'
+import { init } from './database'
 import server from './server'
 
 (async () => {

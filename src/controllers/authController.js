@@ -1,7 +1,7 @@
 import argon2 from 'argon2'
 import uid from 'uid-safe'
-import { pool } from '../../database'
-import generateTimestamp from '../../database/util/generateTimestamp'
+import { pool } from '../database'
+import generateTimestamp from '../database/util/generateTimestamp'
 
 export default {
   register: async (req, res) => {

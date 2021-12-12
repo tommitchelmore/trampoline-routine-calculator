@@ -1,5 +1,5 @@
 import { Router } from "express";
-import accessControl from "../../middleware/accessControl";
+import accessControl from "../middleware/accessControl";
 import skillController from "../controllers/skillController";
 
 const router = Router()
