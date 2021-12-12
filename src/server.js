@@ -26,7 +26,7 @@ app.use(session({
   cookie: { maxAge: 60000 },
 }))
 
-app.use('/auth', authRoutes)
+app.use(authRoutes)
 app.use(userRoutes)
 app.use(contributorRoutes)
 app.use(adminRoutes)
