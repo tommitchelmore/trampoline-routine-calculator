@@ -54,15 +54,9 @@ export default {
     return res.status(200).json({'skills': rows})
   },
   update: async (req, res) => {
-    const { id, newSkill } = req.body
+    const { id, name, description, difficulty, fig_shorthand, start_position, end_position } = req.body
     try {
       assert(id, "Missing field: id")
-      assert(newSkill, "Missing field: newSkill")
-    } catch (err) {
-      return res.status(400).json({ 'message': err.message })
-    }
-    const { name, description, difficulty, fig_shorthand, start_position, end_position } = newSkill
-    try {
       assert(name, "Missing field: newSkill.name")
       assert(description, "Missing field: newSkill.description")
       assert(difficulty || !isNaN(difficulty), "Missing field: newSkill.difficulty")

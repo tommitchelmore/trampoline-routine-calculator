@@ -6,7 +6,7 @@ const router = Router()
 router.use(accessControl.isContributor)
 
 router.post('/skill', skillController.create)
-router.put('/skill', skillController.update)
+router.patch('/skill', skillController.update)
 router.delete('/skill', skillController.delete)
 
 export default router
