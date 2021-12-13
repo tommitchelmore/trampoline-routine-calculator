@@ -66,8 +66,6 @@ export default {
       return res.status(400).json({ 'message': err.message })
     }
 
-    console.log(fig_shorthand)
-
     try {
       await pool.query("UPDATE skill SET name = ?, description = ?, difficulty = ?, fig_shorthand = ?, start_position = ?, end_position = ?, updated_by = ?, updated_at = ? WHERE id = ?", [name, description, difficulty, fig_shorthand, start_position, end_position, req.session.user.email, generateTimestamp(), id])
       const [rows] = await pool.query("SELECT * FROM skill WHERE id = ?", [id])
