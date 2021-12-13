@@ -1,32 +1,16 @@
-# Express minimal boilerplate
-A lightweight and simple boilerplate for using Express with ES6+ syntax via babel.
+#  Trampoline Routine Calculator
+The backend for my app that helps gymnasts calculate difficulty and “FIG Shorthand” for routines performed on Trampolines.  It makes use of Express, MySQL and Redis to store data on types of skills, user routines, and email-password authentication.  The frontend client is built with React (create-react-app), using Material UI and Zustand.
 
-Features:
- - Morgan logger
- - Helmet
- - Simple file structure & example code
-## Installation
-```bash
-mkdir my-app && cd "$_"
-git clone https://github.com/tommitchelmore/express-minimal-boilerplate.git .
-echo "PORT=3000" > .env
-yarn install
-```
-## Usage
-To run the app, simply use `yarn dev`.  To build a production ready, minified version, simply use `yarn build` and `yarn serve` to serve it.
-The production app is built to `./dist`
+[View app](https://trampoline.tom.network)
 
-## Usage with SPAs (React, Vue, etc)
-In the main route file, simply replace:
-```js
-router.get('/', (req, res) => {
-    res.send("Hello!")
-})
-```
-With the following (Assumes that the SPA's build directory is `./client/build`):
-```js
-router.get('*', (req, res) => {
-    res.sendFile('index.html', { root: resolve(__dirname, './../client/build') })
-})
-```
-Note that you need to import `resolve` from the Path module.
+**React frontend repo can be found [here](https://github.com/tommitchelmore/trampoline-routine-calculator-client)**
+
+![enter image description here](https://raw.githubusercontent.com/tommitchelmore/trampoline_routine_calculator_legacy/main/public/screenshot.jpeg?token=AEWHKUKKZJ4Z7XVZ6IPQ2TTBYCN74)
+
+## Roadmap
+- User logins ✅
+- Role-based access control ✅
+- Support for storing skills ✅
+- Admin panel: user control
+- Admin panel: skill control ✅
+- Support for saving routines to user accounts
