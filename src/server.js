@@ -8,7 +8,7 @@ import dotenv from 'dotenv'
 import { resolve } from 'path'
 
 import authRoutes from './routes/authRoutes'
-import mainRoutes from './routes/mainRoutes'
+import publicRoutes from './routes/publicRoutes'
 import userRoutes from './routes/userRoutes'
 import contributorRoutes from './routes/contributorRoutes'
 import adminRoutes from './routes/contributorRoutes'
@@ -26,10 +26,12 @@ app.use(session({
   cookie: { maxAge: 60000 },
 }))
 
-app.use(authRoutes)
-app.use(userRoutes)
-app.use(contributorRoutes)
-app.use(adminRoutes)
-app.use(mainRoutes)
+app.use('/api', publicRoutes)
+app.use('/api', authRoutes)
+app.use('/api', userRoutes)
+app.use('/api', contributorRoutes)
+app.use('/api', adminRoutes)
+
+app.get('*', (req, res) => res.sendFile('index.html', { root: resolve(__dirname, './../client/build') }))
 
 export default app

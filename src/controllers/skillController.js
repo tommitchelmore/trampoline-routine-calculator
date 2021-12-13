@@ -54,18 +54,19 @@ export default {
     return res.status(200).json({'skills': rows})
   },
   update: async (req, res) => {
-    const { id, name, description, difficulty, fig_shorthand, start_position, end_position } = req.body
+    const { id, name, description, difficulty, fig_shorthand = '', start_position, end_position } = req.body
     try {
       assert(id, "Missing field: id")
       assert(name, "Missing field: newSkill.name")
       assert(description, "Missing field: newSkill.description")
       assert(difficulty || !isNaN(difficulty), "Missing field: newSkill.difficulty")
-      assert(fig_shorthand, "Missing field: newSkill.fig_shorthand")
       assert(start_position, "Missing field: newSkill.start_position")
       assert(end_position, "Missing field: newSkill.end_position")
     } catch (err) {
       return res.status(400).json({ 'message': err.message })
     }
+
+    console.log(fig_shorthand)
 
     try {
       await pool.query("UPDATE skill SET name = ?, description = ?, difficulty = ?, fig_shorthand = ?, start_position = ?, end_position = ?, updated_by = ?, updated_at = ? WHERE id = ?", [name, description, difficulty, fig_shorthand, start_position, end_position, req.session.user.email, generateTimestamp(), id])
