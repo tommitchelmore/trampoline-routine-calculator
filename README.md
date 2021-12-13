@@ -1,5 +1,5 @@
 #  Trampoline Routine Calculator
-The backend for my app that helps gymnasts calculate difficulty and “FIG Shorthand” for routines performed on Trampolines.  It makes use of Express, MySQL and Redis to store data on types of skills, user routines, and email-password authentication.  The frontend client is built with React (create-react-app), using Material UI and Zustand.
+The backend for my app that helps gymnasts calculate difficulty and “FIG Shorthand” for routines performed on the Trampoline.  It makes use of Express, MySQL and Redis to store data on types of skills, user routines, and email-password authentication.  The frontend client is built with React (create-react-app), using Material UI and Zustand.
 
 [View app](https://trampoline.tom.network)
 
