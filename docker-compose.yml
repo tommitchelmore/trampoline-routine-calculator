@@ -18,6 +18,9 @@ services:
       - "8081:80"
     depends_on:
       - mysql
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
   server:
     build: .
     ports:
