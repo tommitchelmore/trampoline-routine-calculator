@@ -1,4 +1,9 @@
 {
     "presets": ["env"],
-    "ignore": ["node_modules", "./client"]
+    "ignore": ["node_modules", "./client"],
+    "plugins": [
+        ["transform-runtime", {
+            "regenerator": true
+        }]
+    ]
 }
