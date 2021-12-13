@@ -11,7 +11,8 @@ RUN npm run install:client
 
 COPY . .
 
-EXPOSE 8080
+ENV NODE_ENV production
+EXPOSE 3030
 
 RUN npm run build:client
 RUN npm run build

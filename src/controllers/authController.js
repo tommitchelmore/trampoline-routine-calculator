@@ -1,4 +1,4 @@
-import argon2 from 'argon2'
+import bcrypt from 'bcrypt';
 import uid from 'uid-safe'
 import { pool } from '../database'
 import generateTimestamp from '../database/util/generateTimestamp'
@@ -7,7 +7,7 @@ import emailController from './emailController'
 export default {
   register: async (req, res) => {
     const { email, name, password } = req.body
-    console.log(email, name, password)
+    console.log('[AUTH] Registering user:', email)
 
     const [users] = await pool.query('SELECT * FROM user WHERE email = ?', [email])
 
@@ -21,13 +21,14 @@ export default {
       id: await uid(24),
       email,
       name,
-      password: await argon2.hash(password),
+      password: await bcrypt.hash(password, 10),
       created_at: generateTimestamp()
     }
 
     req.session.userToCreate = newUser
     req.session.expectedCode = [...Array(6)].map(() => Math.floor(Math.random() * 10)).join('')
 
+    console.log('[AUTH] Sending confirmation email to:', email)
     await emailController.confirmationEmail(newUser.name, newUser.email, req.session.expectedCode)
 
     return res.status(200).json(
@@ -38,6 +39,7 @@ export default {
   },
   confirmEmail: async (req, res) => {
     const { code } = req.body
+    console.log('[AUTH] Confirming email:', code)
 
     if (code !== req.session.expectedCode) return res.status(400).json({message: 'Invalid code'})
 
@@ -47,8 +49,6 @@ export default {
     req.session.expectedCode = null
     req.session.userToCreate = null
     req.session.user = rows[0]
-
-    console.log(req.session.user)
 
     return res.status(200).json({
       message: 'Email confirmed',
@@ -67,7 +67,7 @@ export default {
 
     const user = users[0]
 
-    const passwordOk = await argon2.verify(user.password, password)
+    const passwordOk = await bcrypt.compare(password, user.password)
 
     if (!passwordOk) {
       return res.status(400).json({

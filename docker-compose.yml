@@ -2,16 +2,16 @@ version: "3.3"
 
 services:
   redis:
-    image: "redis:alpine"
+    image: "redis"
     restart: on-failure
   mysql:
-    image: "mysql:5.7"
+    image: "mysql"
     restart: on-failure
-    environment: [ "MYSQL_ALLOW_EMPTY_PASSWORD=yes" ]
+    environment: [ "MYSQL_ALLOW_EMPTY_PASSWORD=true" ]
   server:
     build: .
     ports:
-      - "${PORT}:8080"
+      - "8080:8080"
     env_file:
       - .env
     restart: on-failure

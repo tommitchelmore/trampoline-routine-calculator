@@ -27,12 +27,17 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 const RedisStore = connectRedis(session)
+const redisClient = redis.createClient(process.env.REDIS_URL)
+
+redisClient.on('connect', () => console.log('[INIT] Redis connected'))
+redisClient.on('error', err => console.log('[ERROR] Redis error', err))
+
 app.use(session({
   store: new RedisStore({
-    client: redis.createClient(process.env.REDIS_URL)
+    client: redisClient
   }),
   cookie: {
-    secure: process.env.NODE_ENV === 'production'
+    secure: false,
   },
   saveUninitialized: false,
   secret: process.env.SESSION_SECRET,
@@ -46,6 +51,7 @@ app.use('/api', userRoutes)
 app.use('/api', contributorRoutes)
 app.use('/api', adminRoutes)
 
-app.get('*', (req, res) => res.sendFile('index.html', { root: resolve(__dirname, './../client/build') }))
+app.use(express.static(resolve(__dirname, './client')))
+app.get('*', (req, res) => res.sendFile('index.html', { root: resolve(__dirname, './client') }))
 
 export default app

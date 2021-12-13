@@ -53,7 +53,7 @@ const init = async () => {
     console.log('[INIT] Tables initialised')
 
   } catch (error) {
-    console.error(error)
+    setTimeout(async () => await init(), 1000)
   }
 }
 
