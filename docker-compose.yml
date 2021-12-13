@@ -7,15 +7,23 @@ services:
   mysql:
     image: "mysql"
     restart: on-failure
-    environment: [ "MYSQL_ALLOW_EMPTY_PASSWORD=true" ]
+    env_file:
+      - ./.env.docker
     volumes:
       - mysql-data:/var/lib/mysql
+  phpmyadmin:
+    image: "phpmyadmin"
+    restart: on-failure
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
   server:
     build: .
     ports:
       - "8080:8080"
     env_file:
-      - .env
+      - ./.env.docker
     restart: on-failure
     depends_on:
       - "redis"
