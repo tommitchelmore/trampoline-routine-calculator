@@ -1,4 +1,4 @@
 {
-    "presets": ["env", "minify"],
+    "presets": ["env"],
     "ignore": ["node_modules", "./client"]
 }

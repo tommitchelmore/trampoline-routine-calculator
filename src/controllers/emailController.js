@@ -6,7 +6,7 @@ export default {
       'https://api.sendgrid.com/v3/mail/send',
       {
         from: {
-          email: 'noreply@tom.network'
+          email: process.env.SENDGRID_EMAIL_FROM
         },
         template_id: process.env.SENDGRID_TEMPLATE_ID,
         personalizations: [
