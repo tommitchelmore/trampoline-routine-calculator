@@ -8,6 +8,8 @@ services:
     image: "mysql"
     restart: on-failure
     environment: [ "MYSQL_ALLOW_EMPTY_PASSWORD=true" ]
+    volumes:
+      - mysql-data:/var/lib/mysql
   server:
     build: .
     ports:
@@ -18,3 +20,6 @@ services:
     depends_on:
       - "redis"
       - "mysql"
+
+volumes:
+  mysql-data:
