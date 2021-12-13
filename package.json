@@ -17,9 +17,8 @@
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "redis": "^4.0.0",
-    "uid-safe": "^2.1.5",
-    "zustand": "^3.6.7"
+    "redis": "^3.1.2",
+    "uid-safe": "^2.1.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -30,8 +29,13 @@
     "rimraf": "^3.0.2"
   },
   "scripts": {
-    "dev": "nodemon -x babel-node src/index.js",
-    "build": "babel ./src --out-dir ./dist --source-maps --copy-files",
+    "dev": "nodemon --delay 500ms -x babel-node src/index.js",
+    "dev:client": "cd ./client && npm run dev",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:client\"",
+    "install:client": "cd ./client && npm i",
+    "build": "babel ./src --out-dir ./dist --source-maps --copy-files --ignore ./src/client",
+    "build:client": "cd ./client && npm run build",
+    "build:full": "npm run build:client && npm run build",
     "serve": "node -r dotenv/config dist/index.js"
   }
 }
