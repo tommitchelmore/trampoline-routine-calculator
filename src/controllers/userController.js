@@ -2,6 +2,11 @@ import assert from "assert"
 import { pool } from "../database"
 
 export default {
+  getSelf: async (req, res) => {
+    if (!req.session.user) return res.status(401).send({ error: "Unauthorized" })
+    const [rows] = await pool.query("SELECT * FROM user WHERE id = ?", [req.session.user.id])
+    return res.status(200).json({user: rows[0]})
+  },
   read: async (req, res) => {
     if (req.body.id) {
       const [rows] = await pool.query("SELECT * FROM user WHERE id = ?", [req.body.id])
