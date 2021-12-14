@@ -11,16 +11,6 @@ services:
       - ./.env.docker
     volumes:
       - mysql-data:/var/lib/mysql
-  phpmyadmin:
-    image: "phpmyadmin"
-    restart: on-failure
-    ports:
-      - "8081:80"
-    depends_on:
-      - mysql
-    environment:
-      - PMA_HOST=mysql
-      - PMA_PORT=3306
   server:
     build: .
     ports:
