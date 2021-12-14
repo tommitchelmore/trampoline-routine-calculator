@@ -13,7 +13,7 @@ import authRoutes from './routes/authRoutes'
 import publicRoutes from './routes/publicRoutes'
 import userRoutes from './routes/userRoutes'
 import contributorRoutes from './routes/contributorRoutes'
-import adminRoutes from './routes/contributorRoutes'
+import adminRoutes from './routes/adminRoutes'
 
 const app = express()
 
