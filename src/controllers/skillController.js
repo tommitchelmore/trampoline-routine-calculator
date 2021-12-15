@@ -42,15 +42,16 @@ export default {
     return res.status(200).json({'message': 'Skill created successfully', 'skill': newSkill})
   },
   read: async (req, res) => {
+    const cols = req.session.user.role === 'admin' ? "*" : "id,name,description,difficulty,fig_shorthand,start_position,end_position"
     if (req.body.id) {
-      const [rows] = await pool.query("SELECT * FROM skill WHERE id = ?", [req.body.id])
+      const [rows] = await pool.query(`SELECT ${cols} FROM skill WHERE id = ?`, [req.body.id])
       return res.status(200).json({'skill': rows[0]})
     }
     if (req.body.ids && req.body.ids.length > 0) {
-      const [rows] = await pool.query("SELECT * FROM skill WHERE id IN (?)", [req.body.ids])
+      const [rows] = await pool.query(`SELECT ${cols} FROM skill WHERE id IN (?)`, [req.body.ids])
       return res.status(200).json({'skills': rows})
     }
-    const [rows] = await pool.query("SELECT * FROM skill")
+    const [rows] = await pool.query(`SELECT ${cols} FROM skill`)
     return res.status(200).json({'skills': rows})
   },
   update: async (req, res) => {
