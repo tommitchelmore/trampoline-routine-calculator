@@ -4,19 +4,19 @@ import { pool } from "../database"
 export default {
   getSelf: async (req, res) => {
     if (!req.session.user) return res.status(401).send({ error: "Unauthorized" })
-    const [rows] = await pool.query("SELECT * FROM user WHERE id = ?", [req.session.user.id])
+    const [rows] = await pool.query("SELECT id,name,email,role,created_at FROM user WHERE id = ?", [req.session.user.id])
     return res.status(200).json({user: rows[0]})
   },
   read: async (req, res) => {
     if (req.body.id) {
-      const [rows] = await pool.query("SELECT * FROM user WHERE id = ?", [req.body.id])
+      const [rows] = await pool.query("SELECT id,name,email,role,created_at FROM user WHERE id = ?", [req.body.id])
       return res.status(200).json({'user': rows[0]})
     }
     if (req.body.ids && req.body.ids.length > 0) {
-      const [rows] = await pool.query("SELECT * FROM user WHERE id IN (?)", [req.body.ids])
+      const [rows] = await pool.query("SELECT id,name,email,role,created_at FROM user WHERE id IN (?)", [req.body.ids])
       return res.status(200).json({'users': rows})
     }
-    const [rows] = await pool.query("SELECT * FROM user")
+    const [rows] = await pool.query("SELECT id,name,email,role,created_at FROM user")
     return res.status(200).json({'users': rows})
   },
   update: async (req, res) => {
